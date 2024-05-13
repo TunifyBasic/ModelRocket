@@ -59,7 +59,7 @@ double * thrust(Rocket r, World b, double lt) {
     
     lt = lt * PI / 180;
     int pointCount = 0;
-    double outThrust[3];
+    double *outThrust = new double[3];
     double *outC;
     double m = r.getMass();
     double cx = r.getDragX();

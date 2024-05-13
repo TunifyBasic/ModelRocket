@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
     //runs thrust function passing it the rocket, the world it is in, and the angle of launch
     out = thrust(rocket, world, 85);
     printf("Time Taken: %f\n", out[2]);
+    delete out;
     //plots in GNUPlot 
     plot();
     return 0;
