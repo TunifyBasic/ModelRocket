@@ -17,6 +17,7 @@
 #include <math.h>
 #include <fstream>
 #include <iostream>
+#include <sys/stat.h>	// mkdir
 
 #define PI 3.14159265
 
@@ -26,7 +27,7 @@
 double * coast(Projectile r, World b, double V /*Velocity*/,
         double Vt /*Direction in Degrees */, double h /*height*/);
 double * thrust(Rocket r, World b, double lt);
-void plot();
+void plot(const char*);
 
 
 #endif /* THRUST_H */

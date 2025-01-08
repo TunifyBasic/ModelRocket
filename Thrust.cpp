@@ -109,10 +109,74 @@ double * thrust(Rocket r, World b, double lt) {
 
 }
 
-//Plots the travel in gnuplot. 
+//Plots the travel in gnuplot.
 
-void plot(){
-    system("/usr/local/bin/gnuplot -persist -e \"set terminal x11; set size square; plot 'data.dat' smooth bezier \"  && rm data.dat" );
-    printf("To End Program Hit Enter\n");
+//void plot(const char *prefix) {
+//    // Ensure the "./image" directory exists
+//    const char *directory = "./image";
+//    if (mkdir(directory, 0755) != 0 && errno != EEXIST) {
+//        std::cerr << "Error: Failed to create or access the 'image' directory." << std::endl;
+//        return;
+//    }
+//
+//    // Create the gnuplot command with output to a PNG file
+//    std::string outputFile = std::string(directory) + "/" + prefix + "_plot.png";
+//    std::string command = "gnuplot -persist -e \"set terminal pngcairo; "
+//                          "set output '" + outputFile + "'; "
+//                          "set size square; "
+//                          "plot 'data.dat' smooth bezier\"";
+//
+//    // Execute the command
+//    int result = system(command.c_str());
+//
+//    if (result != 0) {
+//        std::cerr << "Error: Failed to execute gnuplot command." << std::endl;
+//    } else {
+//        std::cout << "Plot saved to " << outputFile << std::endl;
+//    }
+//
+//    // Clean up the data file
+//    if (remove("data.dat") != 0) {
+//        std::cerr << "Warning: Failed to delete 'data.dat'." << std::endl;
+//    }
+//
+//    std::cout << "To End Program Hit Enter" << std::endl;
+//    std::cin.ignore();
+//}
+
+void plot(const char *prefix) {
+    // Create the gnuplot command with output to a PNG file
+    std::string outputFile = std::string(prefix) + "_plot.png";
+    std::string command = "gnuplot -persist -e \"set terminal pngcairo; "
+                          "set output '" + outputFile + "'; "
+                          "set size square; "
+                          "plot 'data.dat' smooth bezier\"";
+
+    // Execute the command
+    int result = system(command.c_str());
+
+    if (result != 0) {
+        std::cerr << "Error: Failed to execute gnuplot command." << std::endl;
+    } else {
+        std::cout << "Plot saved to " << outputFile << std::endl;
+    }
+
+    // Clean up the data file
+    if (remove("data.dat") != 0) {
+        std::cerr << "Warning: Failed to delete 'data.dat'." << std::endl;
+    }
+
+    std::cout << "To End Program Hit Enter" << std::endl;
     std::cin.ignore();
 }
+
+//void plot(const char *prefix){
+//    int sz = snprintf(NULL, sz, "%s", "gnuplot -persist -e \"set terminal x11; set size square; plot 'data.dat' smooth bezier \"  && rm data.dat");
+//    char *command = new char[sz];
+//    sz = snprintf(command, sz, "%s", "gnuplot -persist -e \"set terminal x11; set size square; plot 'data.dat' smooth bezier \"  && rm data.dat");
+//    system(command);
+//    printf("To End Program Hit Enter\n");
+//    std::cin.ignore();
+//
+//    delete[] command;
+//}

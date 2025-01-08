@@ -18,7 +18,7 @@ using namespace std;
 /*
  * 
  */
-int main(int argc, char** argv) {
+int main(int argc, char** argp, char **envp) {
     //Rocket (mass, drag x, drag y, area x, area y, newtons of thrust , burn time , flow rate);
     Rocket rocket(80, .3, .3, 1, 1, 2000, 60, 20);
     /*World ( density of air,  acceleration due to gravity) if this is left blank then it creates a world
@@ -31,9 +31,17 @@ int main(int argc, char** argv) {
     printf("Time Taken: %f\n", out[2]);
     delete out;
     //plots in GNUPlot 
-    plot();
+
+    const char *prefix = nullptr;
+    // Iterate over envp to find the PREFIX variable
+    for (int i = 0; envp[i] != nullptr; ++i) {
+        // Check if the current environment variable starts with "PREFIX="
+        if (std::strncmp(envp[i], "PREFIX=", 7) == 0) {
+            prefix = envp[i] + 7; // Skip the "PREFIX=" part
+            break;
+        }
+    }
+
+    plot(prefix);
     return 0;
 }
-
-
-
